@@ -1,9 +1,17 @@
 
 let model
-let blurCounter
+let isActive = false
+
+function handleMessages (message,sender,sendResponse) {
+    if (message.action == "ON"){
+        isActive = true
+    }else if (message.action == "OFF") {isActive = false}
+
+}
+
 async function Classify (){
+    if (isActive){
     let isNSFW =  false
-    console.log("Classify running")
     let frame = document.querySelector ('video')
     let canvaELEM = document.createElement ('canvas')
     canvaELEM.width = frame.videoWidth
@@ -21,14 +29,17 @@ async function Classify (){
     })
     if (isNSFW){
        frame.style.filter = "blur(70px)"
-    }else {frame.style.filter = "none"}
+    }else {frame.style.filter = "none"}}
 }
 async function init (){
     model = await nsfwjs.load(chrome.runtime.getURL('model/'))
-    setInterval(Classify, 1000)
+    setInterval(Classify, 300)
+    }
 
-}
 init ()
+chrome.runtime.onMessage.addListener (handleMessages);
+
+
  
 
 
