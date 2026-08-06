@@ -1,6 +1,6 @@
 {
-    "name" : "NSFW Blocker",
-    "description" : "A cool project",
+    "name" : "NSFW defender",
+    "description" : "...",
     "version" : "1.0",
     "manifest_version" : 3,
     "content_scripts" : [{
@@ -12,5 +12,9 @@
       "resources": [ "model/*" ],
       "matches": [ "https://www.youtube.com/*" ]
     }
-  ]
+  ],
+  "action" : {
+    "default_popup" : "extension.html"
+    
+  }
 }
